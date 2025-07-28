@@ -1,3 +1,25 @@
+# História
+🧠 O que é uma linguagem funcional?
+Uma linguagem funcional é baseada no seguinte princípio:
+
+🧾 O método de computação é a aplicação de funções a argumentos.
+
+Ou seja, não usamos variáveis mutáveis, laços de repetição ou comandos sequenciais como em linguagens imperativas. Em vez disso, definimos funções puras, muitas vezes recursivas, que transformam valores.
+
+| Época           | Evento / Contribuição                                                                           |
+| --------------- | ----------------------------------------------------------------------------------------------- |
+| **1930s**       | Alonzo Church cria o **Lambda Cálculo**, a base matemática da programação funcional.            |
+| **1950s**       | John McCarthy cria o **Lisp**, primeira linguagem funcional (mas ainda com variáveis mutáveis). |
+| **1960s**       | Peter Landin desenvolve o **ISWIM**, primeira linguagem funcional **pura**.                     |
+| **1970s**       | John Backus propõe a linguagem **FP**, com foco em **funções de alta ordem**.                   |
+| **1970s**       | Robin Milner cria o **ML**, com **inferência de tipos** e **tipos polimórficos**.               |
+| **1980s**       | David Turner desenvolve linguagens **preguiçosas**, como **Miranda**.                           |
+| **1987**        | Início do desenvolvimento de **Haskell** por um comitê internacional.                           |
+| **1990s**       | Philip Wadler e outros introduzem **classes de tipo** e **mônadas** em Haskell.                 |
+| **2003 e 2010** | Publicação do **Relatório Haskell** e da versão **Haskell 2010**.                               |
+| **2010–hoje**   | Crescimento do ecossistema: bibliotecas, suporte industrial, influência em outras linguagens.   |
+
+
 # Introdução
 
 ### GHC e GHCi
@@ -37,6 +59,7 @@ quadruple x = double (double x)
 
 ### Regras
 - Variáveis e funções começam com letra minúscula
+- Nomes de listas terminam com 's'
 - Identação importa
 
 
