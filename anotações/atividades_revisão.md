@@ -94,3 +94,57 @@ qsort (x:xs) = qsort maiores ++ [x] ++ qsort menores
     maiores = [a | a <- xs, a > x]
     menores = [a | a <- xs, a <= x]
 ```
+
+### 11. Quem foi o criador do cálculo lambda, e por que ele é importante para o Haskell?
+
+#### Resposta:
+
+O cálculo lambda foi criado por Alonzo Church, nos anos 1930, como uma forma matemática de descrever funções e aplicações de funções. Ele é importante para Haskell porque:
+
+Serviu como base teórica para a programação funcional.
+
+Toda a ideia de funções puras, composição, aplicação vem do cálculo lambda.
+
+### 12. Por que o Haskell foi criado e em que ano se iniciou seu desenvolvimento?
+
+#### Resposta:
+
+Haskell foi criado em 1987 por um comitê internacional com o objetivo de:
+
+- Unificar as ideias das várias linguagens funcionais da época (como Miranda, ML, FP).
+- Criar uma linguagem funcional pura, preguiçosa e com tipagem forte e inferência de tipos.
+- Servir como base para pesquisa acadêmica e ensino de programação funcional.
+
+### 13. Quais foram as duas grandes inovações adicionadas ao Haskell nos anos 1990?
+
+#### Resposta:
+
+As duas inovações marcantes foram:
+
+- Classes de tipo (type classes):
+
+        Permitem sobrecarga de funções e polimorfismo ad-hoc.
+
+        Exemplo: a função (==) funciona para qualquer tipo que seja instância de Eq.
+
+- Mônadas:
+
+        Introduzidas por Philip Wadler.
+
+        Permitem lidar com efeitos colaterais (como I/O) em um contexto funcional puro.
+
+### 14. Explique o teorema de Church-Turing:
+
+#### Resposta:
+
+"Tudo que pode ser computado por qualquer sistema "efetivo" de computação pode ser computado por uma máquina de Turing."
+
+Se algo pode ser resolvido por um algoritmo, então esse algo pode ser implementado numa máquina de Turing, ou de forma equivalente, com cálculo lambda.
+
+Esse teorema é importante porque ele:
+
+- Define o que significa "ser computável".
+
+- Mostra que diferentes modelos formais de computação são equivalentes.
+
+- Serve como base para todas as linguagens de programação — inclusive Haskell.
