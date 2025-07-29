@@ -1,5 +1,5 @@
 Lazy evaluation (avaliação preguiçosa) significa que Haskell só calcula algo quando você realmente precisa do resultado.
-(Gustavo Motta acha que isso na verdade é inteligente, não preguiçoso)
+
 
 ex1:
 soma :: Int
