@@ -389,3 +389,160 @@ safetail xs
 | Decompor listas   | Pattern Matching com `(x:xs)`        |                                  |
 | Combinar listas   | `zip`, `concat`, compreensão         |                                  |
 | Strings           | São apenas `[Char]`                  |                                  |
+
+# Funções recursivas
+
+A recursão é um dos pilares da programação funcional. Em Haskell, como não existem estruturas de repetição imperativas tradicionais (for, while), o papel de repetir operações é desempenhado pela recursão. Uma função recursiva é aquela que se define em termos dela mesma.
+
+Um exemplo clássico é o fatorial:
+
+```haskell
+fac 0 = 1
+fac n = n * fac (n-1)
+```
+
+Aqui temos dois aspectos importantes:
+
+1. Caso base: quando **n = 0**, retornamos 1. Isso impede que a recursão seja infinita.
+
+2. Caso recursivo: quando **n > 0**, calculamos **n * fac (n-1)**.
+
+Esse padrão — um caso base e uma chamada recursiva — aparece em praticamente toda função recursiva.
+
+Outro ponto essencial é que listas em Haskell são estruturas naturalmente definidas de forma recursiva:
+
+- A lista vazia [] é o caso base.
+
+- Uma lista não vazia tem a forma (x:xs), onde x é a cabeça e xs é a cauda (outra lista).
+
+Por isso, muitas funções sobre listas também são recursivas. Por exemplo:
+
+```haskell
+length []     = 0
+length (_:xs) = 1 + length xs
+```
+
+Essa função diz: o tamanho de uma lista vazia é **0**, e o tamanho de uma lista **(x:xs)** é **1** mais o tamanho de xs.
+
+Esse estilo torna a definição de funções em Haskell próxima da definição matemática. Assim como definimos propriedades de conjuntos recursivamente na matemática, em Haskell modelamos listas, árvores e outros tipos da mesma forma.
+
+# Funções de Alta Ordem
+
+As funções de alta ordem são um recurso poderoso em Haskell: são funções que podem receber funções como argumentos ou retornar funções como resultado. Isso é possível porque, em Haskell, funções são cidadãos de primeira classe — elas podem ser passadas como valores, armazenadas em listas e retornadas como resultados.
+
+Um exemplo simples:
+```haskell
+twice f x = f (f x)
+```
+
+Aqui, twice é uma função que recebe uma função f e um valor x, e aplica f duas vezes sobre x. Se fizermos:
+
+```haskell
+twice (+1) 5
+-- 7
+```
+
+Isso mostra como podemos abstrair padrões de cálculo com funções de alta ordem.
+
+A biblioteca padrão de Haskell é cheia delas. Um dos exemplos mais importantes é map, que aplica uma função a cada elemento de uma lista:
+
+```haskell
+map (*2) [1,2,3]
+-- [2,4,6]
+```
+
+Outro é filter, que seleciona apenas os elementos que satisfazem um predicado:
+```haskell
+filter even [1..10]
+-- [2,4,6,8,10]
+```
+
+E temos também as reduções com foldr, que colapsam uma lista em um único valor:
+
+```haskell
+sum = foldr (+) 0
+product = foldr (*) 1
+```
+
+Isso significa que sum não precisa ser definido recursivamente, porque foldr já encapsula o padrão de "percorrer a lista acumulando valores".
+
+Outro conceito central é a composição de funções **(.)**, que permite encadear operações de forma concisa:
+
+```haskell
+odd = not . even
+```
+
+Isso lê-se como: "odd é a composição de **not** com **even**".
+
+Em resumo, funções de alta ordem nos permitem generalizar e abstrair soluções, evitando repetição de código e aproximando a programação da álgebra de funções.
+
+# Declaração de Tipos e Classes
+Enquanto nos capítulos anteriores usamos apenas tipos básicos (como Int, Bool, Char), neste capítulo vemos como definir nossos próprios tipos. Isso é crucial para modelar problemas de forma clara e organizada.
+
+Sinônimos de tipos
+
+Podemos dar nomes mais descritivos a tipos já existentes. Isso ajuda na legibilidade:
+
+### Sinônimos de tipos
+Podemos dar nomes mais descritivos a tipos já existentes. Isso ajuda na legibilidade:
+```haskell
+type Pos = (Int, Int)
+type Pair a = (a, a)
+```
+
+Aqui, **Pos** é apenas um apelido para **(Int,Int)**, útil para representar coordenadas.
+
+#### Tipos algébricos de dados
+Podemos criar novos tipos do zero, usando a palavra-chave **data**:
+
+```haskell
+data Answer = Yes | No | Unknown
+```
+
+Esse tipo é parecido com um enum em outras linguagens. O valor Answer pode ser apenas um desses três construtores.
+
+Outro exemplo:
+
+```haskell
+data Shape = Circle Float | Rect Float Float
+```
+
+Aqui, Shape pode ser um círculo ou um retângulo. E podemos definir funções sobre ele:
+```haskell
+area (Circle r) = pi * r^2
+area (Rect x y) = x * y
+```
+
+Isso ilustra um poder imenso: combinar dados com comportamento de forma declarativa.
+
+### Tipos parametrizados
+Podemos criar tipos genéricos:
+
+```haskell
+data Maybe a = Nothing | Just a
+```
+
+Esse tipo expressa a ideia de "valor opcional". Ele evita **null** e torna a ausência de valor parte do sistema de tipos.
+
+### Tipos recursivos
+
+Podemos definir tipos que se referem a si mesmos. Isso é útil para modelar estruturas como números naturais, listas e árvores.
+
+```haskell
+data Nat = Zero | Succ Nat
+```
+
+Esse tipo define os números naturais: **Zero, Succ Zero, Succ (Succ Zero)** etc.
+
+Outro exemplo:
+```haskell
+data Expr = Val Int | Add Expr Expr | Mul Expr Expr
+
+eval (Val n)   = n
+eval (Add x y) = eval x + eval y
+eval (Mul x y) = eval x * eval y
+```
+
+Aqui definimos expressões aritméticas como árvores, e depois escrevemos um avaliador recursivo.
+
+Esse estilo é extremamente poderoso, porque nos permite modelar qualquer domínio dentro da linguagem, construindo nossas próprias estruturas de dados.
